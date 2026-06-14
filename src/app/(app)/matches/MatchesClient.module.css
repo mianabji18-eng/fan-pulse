@@ -1,0 +1,248 @@
+/* ============================================================
+   Matches Center Styles
+   ============================================================ */
+
+.page {
+  padding: var(--space-lg) var(--space-md);
+  padding-top: max(env(safe-area-inset-top, 0px), var(--space-lg));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* ---- Tabs (Segmented Control) ---- */
+.tabs {
+  display: flex;
+  background: var(--bg-card);
+  padding: 4px;
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border-card);
+  gap: 4px;
+}
+
+.tabBtn {
+  flex: 1;
+  padding: var(--space-sm) 0;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.tabBtn.tabActive {
+  background: var(--c1);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- Content Area ---- */
+.content {
+  flex: 1;
+}
+
+/* ---- Calendar View ---- */
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.dateGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.dateHeader {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding-left: 4px;
+}
+
+.matchList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.matchCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+  position: relative;
+}
+
+.matchCard:hover {
+  background: var(--bg-card2);
+  border-color: rgba(var(--c1-rgb), 0.3);
+  transform: translateY(-2px);
+}
+
+.matchMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.teamsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.flag {
+  font-size: 1.5rem;
+  min-width: 28px;
+  text-align: center;
+}
+
+.teamName {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.score {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  min-width: 30px;
+  text-align: right;
+  color: var(--text-primary);
+}
+
+.liveIndicator {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--grad-live);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: var(--r-full);
+}
+
+.finishedIndicator {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ---- Groups View ---- */
+.groupsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.groupCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.groupHeader {
+  background: var(--bg-card2);
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 800;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-card);
+}
+
+.groupTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.groupTable th {
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+}
+
+.groupTable td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+  font-weight: 500;
+}
+
+.groupTable tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---- Bracket View ---- */
+.bracketContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.bracketPlaceholder {
+  text-align: center;
+  color: var(--text-muted);
+  padding: var(--space-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-xl);
+}
+
+.bracketIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.emptyState {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: var(--space-lg);
+}

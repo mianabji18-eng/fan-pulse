@@ -1,0 +1,266 @@
+/* ============================================================
+   Match Details Styles
+   ============================================================ */
+
+.page {
+  padding: var(--space-lg) var(--space-md);
+  padding-top: max(env(safe-area-inset-top, 0px), var(--space-lg));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backBtn {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 8px 0;
+  transition: color var(--t-fast);
+}
+
+.backBtn:hover {
+  color: var(--text-primary);
+}
+
+.phase {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ---- Scoreboard ---- */
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-2xl);
+  padding: var(--space-xl) var(--space-md);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.scoreboard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: var(--grad-c1-c2);
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
+}
+
+.flag {
+  font-size: 3.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+}
+
+.teamName {
+  font-size: 1rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.scoreArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  flex: 1;
+}
+
+.vs {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text-muted);
+}
+
+.scoreRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.score {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.scoreDivider {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+.liveTag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--grad-live);
+  color: white;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  margin-top: -4px;
+}
+
+.finishedTag {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ---- Info Card ---- */
+.infoCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-xl);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.infoIcon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card2);
+  border-radius: 50%;
+}
+
+.infoLabel {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.infoValue {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* ---- Actions Grid ---- */
+.actionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.actionCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-xl);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.actionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--space-sm);
+}
+
+.actionHeader h3 {
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.statusPill {
+  font-size: 0.6rem;
+  background: var(--bg-card2);
+  padding: 2px 6px;
+  border-radius: var(--r-sm);
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.actionEmpty {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.predictionResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  flex: 1;
+}
+
+.predScore {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--c1);
+}
+
+.pointsEarned {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: #30d158;
+}
+
+.checkInResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.photoPreview {
+  width: 100%;
+  height: 80px;
+  border-radius: var(--r-md);
+  background-size: cover;
+  background-position: center;
+  border: 1px solid var(--border-card);
+}

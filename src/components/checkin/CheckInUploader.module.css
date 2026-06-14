@@ -1,0 +1,103 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.uploadBox {
+  border: 2px dashed var(--border-color, #333);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.2s;
+}
+
+.uploadBox:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--primary-color, #00ff88);
+}
+
+.uploadIcon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.uploadBox p {
+  color: var(--text-secondary, #888);
+  margin: 0;
+}
+
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.previewImage {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #333);
+}
+
+.changeBtn {
+  background: transparent;
+  color: var(--text-secondary, #888);
+  border: 1px solid var(--border-color, #333);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.changeBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary, #fff);
+}
+
+.submitBtn {
+  background: var(--primary-color, #00ff88);
+  color: #000;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  width: 100%;
+}
+
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.message {
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.success {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--primary-color, #00ff88);
+}
+
+.error {
+  background: rgba(255, 50, 50, 0.1);
+  color: #ff5555;
+}

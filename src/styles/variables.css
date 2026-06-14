@@ -1,0 +1,129 @@
+/* ============================================================
+   FIFA World Cup 2026 — Fan Pulse | CSS Variables & Theming
+   Migrated from css/variables.css — do NOT use Tailwind
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ---- Base Design Tokens ---- */
+:root {
+  /* World Cup 2026 brand palette */
+  --wc-red:    #C8102E;
+  --wc-gold:   #F0B323;
+  --wc-navy:   #1A1F3C;
+  --wc-teal:   #00A9A5;
+
+  /* Country theme slots (overridden per user selection) */
+  --c1: #C8102E;
+  --c2: #F0B323;
+  --c3: #1A1F3C;
+  --c1-rgb: 200, 16, 46;
+  --c2-rgb: 240, 179, 35;
+  --c3-rgb: 26, 31, 60;
+
+  /* Backgrounds */
+  --bg-deep:    #08080F;
+  --bg-surface: #0F0F1A;
+  --bg-card:    #15151F;
+  --bg-card2:   #1C1C28;
+  --bg-input:   #1E1E2C;
+  --bg-overlay: rgba(8, 8, 15, 0.85);
+
+  /* Text */
+  --text-primary:   #F4F4F8;
+  --text-secondary: #9898AF;
+  --text-muted:     #5C5C73;
+  --text-on-accent: #FFFFFF;
+
+  /* Borders */
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-card:   rgba(255,255,255,0.10);
+  --border-accent: rgba(var(--c1-rgb), 0.4);
+
+  /* Gradients */
+  --grad-brand:    linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+  --grad-hero:     linear-gradient(160deg, rgba(var(--c1-rgb),0.25) 0%, rgba(var(--c3-rgb),0.6) 60%, var(--bg-deep) 100%);
+  --grad-card:     linear-gradient(145deg, var(--bg-card) 0%, var(--bg-card2) 100%);
+  --grad-glass:    linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
+  --grad-live:     linear-gradient(90deg, #FF2D55 0%, #FF6B35 100%);
+
+  /* Semantic colors */
+  --success:  #30D158;
+  --danger:   #FF453A;
+  --warning:  #FFD60A;
+  --info:     #0A84FF;
+  --live-red: #FF2D55;
+
+  /* Typography */
+  --font-display: 'Outfit', sans-serif;
+  --font-body:    'Space Grotesk', sans-serif;
+
+  /* Spacing */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+
+  /* Radius */
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  16px;
+  --r-xl:  20px;
+  --r-2xl: 28px;
+  --r-full: 100px;
+
+  /* Shadows */
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.4);
+  --shadow-md:   0 4px 20px rgba(0,0,0,0.5);
+  --shadow-lg:   0 8px 40px rgba(0,0,0,0.6);
+  --shadow-glow: 0 0 24px rgba(var(--c1-rgb), 0.35);
+  --shadow-gold: 0 0 20px rgba(var(--c2-rgb), 0.3);
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast:   150ms;
+  --t-normal: 300ms;
+  --t-slow:   500ms;
+
+  /* Bottom nav height */
+  --nav-h: 68px;
+  --safe-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---- Country Theme Overrides ---- */
+[data-theme="usa"] { --c1: #B22234; --c2: #3C3B6E; --c3: #FFFFFF; --c1-rgb:178,34,52; --c2-rgb:60,59,110; --c3-rgb:255,255,255; }
+[data-theme="can"] { --c1: #FF0000; --c2: #FFFFFF; --c3: #FF0000; --c1-rgb:255,0,0; --c2-rgb:255,255,255; --c3-rgb:255,0,0; }
+[data-theme="mex"] { --c1: #006847; --c2: #FFFFFF; --c3: #CE1126; --c1-rgb:0,104,71; --c2-rgb:255,255,255; --c3-rgb:206,17,38; }
+[data-theme="arg"] { --c1: #74ACDF; --c2: #FFFFFF; --c3: #74ACDF; --c1-rgb:116,172,223; --c2-rgb:255,255,255; --c3-rgb:116,172,223; }
+[data-theme="bra"] { --c1: #009C3B; --c2: #FFDF00; --c3: #002776; --c1-rgb:0,156,59; --c2-rgb:255,223,0; --c3-rgb:0,39,118; }
+[data-theme="fra"] { --c1: #002395; --c2: #FFFFFF; --c3: #ED2939; --c1-rgb:0,35,149; --c2-rgb:255,255,255; --c3-rgb:237,41,57; }
+[data-theme="eng"] { --c1: #CF091E; --c2: #FFFFFF; --c3: #CF091E; --c1-rgb:207,9,30; --c2-rgb:255,255,255; --c3-rgb:207,9,30; }
+[data-theme="ger"] { --c1: #DD0000; --c2: #000000; --c3: #FFCE00; --c1-rgb:221,0,0; --c2-rgb:0,0,0; --c3-rgb:255,206,0; }
+[data-theme="esp"] { --c1: #AA151B; --c2: #F1BF00; --c3: #AA151B; --c1-rgb:170,21,27; --c2-rgb:241,191,0; --c3-rgb:170,21,27; }
+[data-theme="por"] { --c1: #006600; --c2: #FF0000; --c3: #006600; --c1-rgb:0,102,0; --c2-rgb:255,0,0; --c3-rgb:0,102,0; }
+[data-theme="ned"] { --c1: #AE1C28; --c2: #FFFFFF; --c3: #21468B; --c1-rgb:174,28,40; --c2-rgb:255,255,255; --c3-rgb:33,70,139; }
+[data-theme="bel"] { --c1: #FAE042; --c2: #000000; --c3: #EF3340; --c1-rgb:250,224,66; --c2-rgb:0,0,0; --c3-rgb:239,51,64; }
+[data-theme="cro"] { --c1: #FF0000; --c2: #FFFFFF; --c3: #0000FF; --c1-rgb:255,0,0; --c2-rgb:255,255,255; --c3-rgb:0,0,255; }
+[data-theme="uru"] { --c1: #75AADB; --c2: #FFFFFF; --c3: #75AADB; --c1-rgb:117,170,219; --c2-rgb:255,255,255; --c3-rgb:117,170,219; }
+[data-theme="col"] { --c1: #FCD116; --c2: #003087; --c3: #CE1126; --c1-rgb:252,209,22; --c2-rgb:0,48,135; --c3-rgb:206,17,38; }
+[data-theme="sen"] { --c1: #00853F; --c2: #FDEF42; --c3: #E31B23; --c1-rgb:0,133,63; --c2-rgb:253,239,66; --c3-rgb:227,27,35; }
+[data-theme="mar"] { --c1: #C1272D; --c2: #006233; --c3: #C1272D; --c1-rgb:193,39,45; --c2-rgb:0,98,51; --c3-rgb:193,39,45; }
+[data-theme="jpn"] { --c1: #BC002D; --c2: #FFFFFF; --c3: #BC002D; --c1-rgb:188,0,45; --c2-rgb:255,255,255; --c3-rgb:188,0,45; }
+[data-theme="kor"] { --c1: #CD2E3A; --c2: #FFFFFF; --c3: #003478; --c1-rgb:205,46,58; --c2-rgb:255,255,255; --c3-rgb:0,52,120; }
+[data-theme="aus"] { --c1: #00008B; --c2: #FFFFFF; --c3: #FF0000; --c1-rgb:0,0,139; --c2-rgb:255,255,255; --c3-rgb:255,0,0; }
+[data-theme="gha"] { --c1: #006B3F; --c2: #FCD116; --c3: #EF3340; --c1-rgb:0,107,63; --c2-rgb:252,209,22; --c3-rgb:239,51,64; }
+[data-theme="civ"] { --c1: #F77F00; --c2: #FFFFFF; --c3: #009A44; --c1-rgb:247,127,0; --c2-rgb:255,255,255; --c3-rgb:0,154,68; }
+[data-theme="ecu"] { --c1: #FFD100; --c2: #003893; --c3: #EF3340; --c1-rgb:255,209,0; --c2-rgb:0,56,147; --c3-rgb:239,51,64; }
+[data-theme="ukr"] { --c1: #005BBB; --c2: #FFD500; --c3: #005BBB; --c1-rgb:0,91,187; --c2-rgb:255,213,0; --c3-rgb:0,91,187; }
+[data-theme="pol"] { --c1: #FFFFFF; --c2: #DC143C; --c3: #FFFFFF; --c1-rgb:255,255,255; --c2-rgb:220,20,60; --c3-rgb:255,255,255; }
+[data-theme="den"] { --c1: #C60C30; --c2: #FFFFFF; --c3: #C60C30; --c1-rgb:198,12,48; --c2-rgb:255,255,255; --c3-rgb:198,12,48; }
+[data-theme="ser"] { --c1: #C6363C; --c2: #0C4076; --c3: #FFFFFF; --c1-rgb:198,54,60; --c2-rgb:12,64,118; --c3-rgb:255,255,255; }
+[data-theme="par"] { --c1: #D52B1E; --c2: #FFFFFF; --c3: #009900; --c1-rgb:213,43,30; --c2-rgb:255,255,255; --c3-rgb:0,153,0; }
+[data-theme="col"] { --c1: #FCD116; --c2: #003087; --c3: #CE1126; --c1-rgb:252,209,22; --c2-rgb:0,48,135; --c3-rgb:206,17,38; }
+[data-theme="ven"] { --c1: #CF142B; --c2: #F4E20D; --c3: #00247D; --c1-rgb:207,20,43; --c2-rgb:244,226,13; --c3-rgb:0,36,125; }
+[data-theme="sau"] { --c1: #006C35; --c2: #FFFFFF; --c3: #006C35; --c1-rgb:0,108,53; --c2-rgb:255,255,255; --c3-rgb:0,108,53; }
+[data-theme="mor"] { --c1: #C1272D; --c2: #006233; --c3: #C1272D; --c1-rgb:193,39,45; --c2-rgb:0,98,51; --c3-rgb:193,39,45; }
+[data-theme="nig"] { --c1: #008751; --c2: #FFFFFF; --c3: #008751; --c1-rgb:0,135,81; --c2-rgb:255,255,255; --c3-rgb:0,135,81; }

@@ -1,0 +1,123 @@
+.container {
+  padding: 2rem 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--text-primary, #fff);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary, #aaa);
+  font-size: 0.95rem;
+}
+
+.card {
+  background: var(--surface-bg, #1a1a1a);
+  border: 1px solid var(--border-color, #333);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.matchSelector {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color, #333);
+  padding-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  color: var(--text-secondary, #888);
+  margin-bottom: 1rem;
+}
+
+.matchesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.matchItem {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.matchItem.selected {
+  border-color: var(--primary-color, #00ff88);
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.matchLink {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--input-bg, #000);
+  color: var(--text-primary, #fff);
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.matchLink:hover {
+  background: var(--hover-bg, #333);
+}
+
+.badge {
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+}
+
+.uploadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.uploadTitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color, #00ff88);
+  text-align: center;
+}
+
+.alreadyCheckedIn {
+  text-align: center;
+  padding: 2rem;
+}
+
+.successIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.alreadyCheckedIn p {
+  color: var(--text-primary, #fff);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.small {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #888) !important;
+  font-weight: normal !important;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-secondary, #888);
+  padding: 2rem;
+}

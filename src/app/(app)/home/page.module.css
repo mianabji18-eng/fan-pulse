@@ -1,0 +1,249 @@
+/* ============================================================
+   Home Dashboard Styles
+   ============================================================ */
+
+.page {
+  padding: var(--space-lg) var(--space-md);
+  padding-top: max(env(safe-area-inset-top, 0px), var(--space-lg));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* ---- Header ---- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.greeting {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.countryBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.avatarBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--grad-glass);
+  border: 1.5px solid var(--border-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: transform var(--t-fast) var(--ease-spring);
+  box-shadow: var(--shadow-glow);
+}
+.avatarBtn:hover { transform: scale(1.08); }
+.avatarEmoji { line-height: 1; }
+
+/* ---- Bento Grid ---- */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: var(--space-sm);
+}
+
+.bentoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: var(--space-lg) var(--space-md);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border-card);
+  text-align: center;
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
+}
+.bentoCard:hover { transform: translateY(-2px); }
+
+.bentoTotal {
+  grid-column: 1 / -1;
+  background: linear-gradient(145deg, rgba(var(--c1-rgb),0.2) 0%, rgba(var(--c2-rgb),0.1) 100%);
+  border-color: rgba(var(--c1-rgb),0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.bentoPred    { background: rgba(10,132,255,0.08); border-color: rgba(10,132,255,0.2); }
+.bentoCheckin { background: rgba(48,209,88,0.08);  border-color: rgba(48,209,88,0.2); }
+.bentoStreak  { background: rgba(255,214,10,0.08); border-color: rgba(255,214,10,0.2); }
+
+.bentoIcon  { font-size: 1.5rem; line-height: 1; }
+.bentoValue {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.bentoTotal .bentoValue { font-size: 2.25rem; color: var(--c1); }
+.bentoLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ---- Live Banner ---- */
+.liveBanner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xl) var(--space-lg);
+  background: linear-gradient(145deg, rgba(255,45,85,0.15) 0%, rgba(255,107,53,0.08) 100%);
+  border: 1px solid rgba(255,45,85,0.3);
+  border-radius: var(--r-2xl);
+  animation: liveGlow 2s ease-in-out infinite alternate;
+}
+@keyframes liveGlow {
+  from { box-shadow: 0 0 20px rgba(255,45,85,0.15); }
+  to   { box-shadow: 0 0 40px rgba(255,45,85,0.35); }
+}
+
+.livePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--grad-live);
+  color: white;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+}
+
+.liveTeams {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+.liveTeam {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.liveFlag  { font-size: 2.5rem; }
+.liveScore {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+.liveDivider {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+.livePhase {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ---- Section ---- */
+.section { display: flex; flex-direction: column; }
+
+/* ---- Match list ---- */
+.matchList { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.matchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-lg);
+  transition: background var(--t-fast), border-color var(--t-fast);
+  cursor: pointer;
+}
+.matchRow:hover {
+  background: var(--bg-card2);
+  border-color: rgba(var(--c1-rgb),0.25);
+}
+.matchPhase {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  flex: 1;
+}
+.matchTeams {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 1.375rem;
+}
+.matchVs {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.matchDate {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  flex: 1;
+  text-align: right;
+}
+
+.emptyState {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  padding: var(--space-xl);
+}
+
+/* ---- Leaderboard mini ---- */
+.leaderList { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.leaderRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-lg);
+}
+.rank        { font-size: 1.125rem; min-width: 28px; text-align: center; }
+.rank1       { filter: drop-shadow(0 0 8px rgba(255,215,0,0.6)); }
+.rank2       { filter: drop-shadow(0 0 8px rgba(192,192,192,0.6)); }
+.rank3       { filter: drop-shadow(0 0 8px rgba(205,127,50,0.6)); }
+.leaderFlag  { font-size: 1.25rem; }
+.leaderName  { flex: 1; font-weight: 600; font-size: 0.9375rem; }
+.leaderPts   {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--c2);
+}
+
+/* ---- Quick actions ---- */
+.quickActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  padding-bottom: var(--space-lg);
+}

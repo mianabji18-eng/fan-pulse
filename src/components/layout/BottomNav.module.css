@@ -1,0 +1,86 @@
+/* ============================================================
+   Bottom Navigation Bar Styles
+   ============================================================ */
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: var(--nav-h);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: rgba(15, 15, 26, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
+}
+
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex: 1;
+  height: 100%;
+  padding: 0 4px;
+  position: relative;
+  transition: transform var(--t-fast) var(--ease-spring);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.navItem:active {
+  transform: scale(0.9);
+}
+
+.navIcon {
+  font-size: 1.375rem;
+  line-height: 1;
+  transition: transform var(--t-fast) var(--ease-spring), filter var(--t-fast);
+  filter: grayscale(50%) opacity(0.6);
+}
+
+.navLabel {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--t-fast);
+  white-space: nowrap;
+}
+
+/* ---- Active state ---- */
+.navItem.active .navIcon {
+  filter: none;
+  transform: translateY(-2px) scale(1.1);
+}
+.navItem.active .navLabel {
+  color: var(--c1);
+  font-weight: 700;
+}
+
+/* Active indicator dot */
+.activeDot {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--c1);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--c1);
+}
+
+/* Check-in item — special pulsing accent */
+.navItem[aria-label="Check-in"] .navIcon {
+  filter: drop-shadow(0 0 6px rgba(var(--c2-rgb), 0.5));
+}

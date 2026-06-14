@@ -1,0 +1,155 @@
+.container {
+  padding: 2rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--text-primary, #fff);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary, #aaa);
+  margin-bottom: 1.5rem;
+}
+
+.pointsPill {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--primary-color, #00ff88);
+  border: 1px solid var(--primary-color, #00ff88);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 1.2rem;
+}
+
+.pointsPill strong {
+  font-weight: 900;
+  margin-left: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: var(--surface-bg, #1a1a1a);
+  border: 1px solid var(--border-color, #333);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:not(.locked):hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.5);
+}
+
+.locked {
+  opacity: 0.6;
+}
+
+.locked .imageBox {
+  filter: grayscale(100%);
+}
+
+.imageBox {
+  height: 160px;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-color, #333);
+}
+
+.icon {
+  font-size: 4rem;
+}
+
+.content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.typeTag {
+  background: var(--input-bg, #000);
+  color: var(--text-secondary, #888);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.stock {
+  color: #ffaa00;
+  font-weight: bold;
+}
+
+.prizeName {
+  font-size: 1.2rem;
+  color: var(--text-primary, #fff);
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  color: var(--text-secondary, #aaa);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.actionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.cost {
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--primary-color, #00ff88);
+}
+
+.redeemBtn {
+  background: var(--primary-color, #00ff88);
+  color: #000;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.redeemBtn:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.redeemBtn:disabled {
+  background: var(--border-color, #333);
+  color: var(--text-secondary, #888);
+  cursor: not-allowed;
+}
