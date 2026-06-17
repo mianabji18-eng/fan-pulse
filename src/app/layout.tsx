@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import '@/styles/globals.css';
+import './globals.css';
 
 // ============================================================
 // Fan Pulse — Root Layout

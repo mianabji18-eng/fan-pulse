@@ -34,6 +34,7 @@ export async function POST(request: Request) {
         id: item.id,
         match_date,
         match_time,
+        // local y visitante son llaves foráneas a la tabla equipos (e.g. 'MEX', 'A2', 'C4')
         home_country_id: item.local,
         away_country_id: item.visitante,
         stadium_id: item.estadio,

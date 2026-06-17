@@ -23,54 +23,77 @@ function hexToRgb(hex: string): string {
 }
 
 const raw: Omit<Country, 'c1rgb' | 'c2rgb' | 'c3rgb'>[] = [
-  { id: 'usa', name: 'United States',   flag: '🇺🇸', c1: '#B22234', c2: '#3C3B6E', c3: '#FFFFFF', group: 'A' },
-  { id: 'can', name: 'Canada',          flag: '🇨🇦', c1: '#FF0000', c2: '#FFFFFF', c3: '#FF0000', group: 'A' },
-  { id: 'mex', name: 'Mexico',          flag: '🇲🇽', c1: '#006847', c2: '#FFFFFF', c3: '#CE1126', group: 'A' },
-  { id: 'civ', name: "Côte d'Ivoire",   flag: '🇨🇮', c1: '#F77F00', c2: '#FFFFFF', c3: '#009A44', group: 'A' },
-  { id: 'ecu', name: 'Ecuador',         flag: '🇪🇨', c1: '#FFD100', c2: '#003893', c3: '#EF3340', group: 'A' },
-  { id: 'arg', name: 'Argentina',       flag: '🇦🇷', c1: '#74ACDF', c2: '#FFFFFF', c3: '#74ACDF', group: 'B' },
-  { id: 'bra', name: 'Brazil',          flag: '🇧🇷', c1: '#009C3B', c2: '#FFDF00', c3: '#002776', group: 'B' },
-  { id: 'gha', name: 'Ghana',           flag: '🇬🇭', c1: '#006B3F', c2: '#FCD116', c3: '#EF3340', group: 'B' },
-  { id: 'ven', name: 'Venezuela',       flag: '🇻🇪', c1: '#CF142B', c2: '#F4E20D', c3: '#00247D', group: 'B' },
-  { id: 'fra', name: 'France',          flag: '🇫🇷', c1: '#002395', c2: '#FFFFFF', c3: '#ED2939', group: 'C' },
-  { id: 'eng', name: 'England',         flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', c1: '#CF091E', c2: '#FFFFFF', c3: '#CF091E', group: 'C' },
-  { id: 'cmr', name: 'Cameroon',        flag: '🇨🇲', c1: '#007A5E', c2: '#CE1126', c3: '#FCD116', group: 'C' },
-  { id: 'chl', name: 'Chile',           flag: '🇨🇱', c1: '#D52B1E', c2: '#FFFFFF', c3: '#003DA5', group: 'C' },
-  { id: 'ger', name: 'Germany',         flag: '🇩🇪', c1: '#DD0000', c2: '#000000', c3: '#FFCE00', group: 'D' },
-  { id: 'esp', name: 'Spain',           flag: '🇪🇸', c1: '#AA151B', c2: '#F1BF00', c3: '#AA151B', group: 'D' },
-  { id: 'pol', name: 'Poland',          flag: '🇵🇱', c1: '#FFFFFF', c2: '#DC143C', c3: '#FFFFFF', group: 'D' },
-  { id: 'par', name: 'Paraguay',        flag: '🇵🇾', c1: '#D52B1E', c2: '#FFFFFF', c3: '#009900', group: 'D' },
-  { id: 'por', name: 'Portugal',        flag: '🇵🇹', c1: '#006600', c2: '#FF0000', c3: '#006600', group: 'E' },
-  { id: 'ned', name: 'Netherlands',     flag: '🇳🇱', c1: '#AE1C28', c2: '#FFFFFF', c3: '#21468B', group: 'E' },
-  { id: 'sui', name: 'Switzerland',     flag: '🇨🇭', c1: '#D52B1E', c2: '#FFFFFF', c3: '#D52B1E', group: 'E' },
-  { id: 'bol', name: 'Bolivia',         flag: '🇧🇴', c1: '#D52B1E', c2: '#F9E300', c3: '#007A3D', group: 'E' },
-  { id: 'bel', name: 'Belgium',         flag: '🇧🇪', c1: '#FAE042', c2: '#000000', c3: '#EF3340', group: 'F' },
-  { id: 'cro', name: 'Croatia',         flag: '🇭🇷', c1: '#FF0000', c2: '#FFFFFF', c3: '#0000FF', group: 'F' },
-  { id: 'aut', name: 'Austria',         flag: '🇦🇹', c1: '#ED2939', c2: '#FFFFFF', c3: '#ED2939', group: 'F' },
-  { id: 'crc', name: 'Costa Rica',      flag: '🇨🇷', c1: '#002B7F', c2: '#FFFFFF', c3: '#CE1126', group: 'F' },
-  { id: 'uru', name: 'Uruguay',         flag: '🇺🇾', c1: '#75AADB', c2: '#FFFFFF', c3: '#75AADB', group: 'G' },
-  { id: 'col', name: 'Colombia',        flag: '🇨🇴', c1: '#FCD116', c2: '#003087', c3: '#CE1126', group: 'G' },
-  { id: 'den', name: 'Denmark',         flag: '🇩🇰', c1: '#C60C30', c2: '#FFFFFF', c3: '#C60C30', group: 'G' },
-  { id: 'pan', name: 'Panama',          flag: '🇵🇦', c1: '#FFFFFF', c2: '#D21034', c3: '#005293', group: 'G' },
-  { id: 'sen', name: 'Senegal',         flag: '🇸🇳', c1: '#00853F', c2: '#FDEF42', c3: '#E31B23', group: 'H' },
-  { id: 'mar', name: 'Morocco',         flag: '🇲🇦', c1: '#C1272D', c2: '#006233', c3: '#C1272D', group: 'H' },
-  { id: 'ser', name: 'Serbia',          flag: '🇷🇸', c1: '#C6363C', c2: '#0C4076', c3: '#FFFFFF', group: 'H' },
-  { id: 'jam', name: 'Jamaica',         flag: '🇯🇲', c1: '#000000', c2: '#FED100', c3: '#009B3A', group: 'H' },
-  { id: 'jpn', name: 'Japan',           flag: '🇯🇵', c1: '#BC002D', c2: '#FFFFFF', c3: '#BC002D', group: 'I' },
-  { id: 'kor', name: 'South Korea',     flag: '🇰🇷', c1: '#CD2E3A', c2: '#FFFFFF', c3: '#003478', group: 'I' },
-  { id: 'ukr', name: 'Ukraine',         flag: '🇺🇦', c1: '#005BBB', c2: '#FFD500', c3: '#005BBB', group: 'I' },
-  { id: 'nzl', name: 'New Zealand',     flag: '🇳🇿', c1: '#00247D', c2: '#FFFFFF', c3: '#CC142B', group: 'I' },
-  { id: 'aus', name: 'Australia',       flag: '🇦🇺', c1: '#00008B', c2: '#FFFFFF', c3: '#FF0000', group: 'J' },
-  { id: 'irn', name: 'Iran',            flag: '🇮🇷', c1: '#239F40', c2: '#FFFFFF', c3: '#DA0000', group: 'J' },
-  { id: 'tur', name: 'Turkey',          flag: '🇹🇷', c1: '#E30A17', c2: '#FFFFFF', c3: '#E30A17', group: 'J' },
-  { id: 'ind', name: 'Indonesia',       flag: '🇮🇩', c1: '#CE1126', c2: '#FFFFFF', c3: '#CE1126', group: 'J' },
-  { id: 'sau', name: 'Saudi Arabia',    flag: '🇸🇦', c1: '#006C35', c2: '#FFFFFF', c3: '#006C35', group: 'K' },
-  { id: 'qat', name: 'Qatar',           flag: '🇶🇦', c1: '#8D1B3D', c2: '#FFFFFF', c3: '#8D1B3D', group: 'K' },
-  { id: 'hun', name: 'Hungary',         flag: '🇭🇺', c1: '#CE2939', c2: '#FFFFFF', c3: '#477050', group: 'K' },
-  { id: 'irq', name: 'Iraq',            flag: '🇮🇶', c1: '#CE1126', c2: '#FFFFFF', c3: '#007A3D', group: 'K' },
-  { id: 'egy', name: 'Egypt',           flag: '🇪🇬', c1: '#CE1126', c2: '#FFFFFF', c3: '#000000', group: 'L' },
-  { id: 'nig', name: 'Nigeria',         flag: '🇳🇬', c1: '#008751', c2: '#FFFFFF', c3: '#008751', group: 'L' },
-  { id: 'slo', name: 'Slovenia',        flag: '🇸🇮', c1: '#003DA5', c2: '#FFFFFF', c3: '#E32212', group: 'L' },
+  // GRUPO A
+  { id: 'mex', name: 'México',        flag: '🇲🇽', c1: '#006847', c2: '#FFFFFF', c3: '#CE1126', group: 'A' },
+  { id: 'rsa', name: 'Sudáfrica',     flag: '🇿🇦', c1: '#007749', c2: '#FFB81C', c3: '#E03C31', group: 'A' },
+  { id: 'kor', name: 'Corea',         flag: '🇰🇷', c1: '#CD2E3A', c2: '#FFFFFF', c3: '#003478', group: 'A' },
+  { id: 'cze', name: 'Chequia',       flag: '🇨🇿', c1: '#D7141A', c2: '#11457E', c3: '#FFFFFF', group: 'A' },
+
+  // GRUPO B
+  { id: 'can', name: 'Canadá',        flag: '🇨🇦', c1: '#FF0000', c2: '#FFFFFF', c3: '#FF0000', group: 'B' },
+  { id: 'bih', name: 'Bosnia',        flag: '🇧🇦', c1: '#002395', c2: '#FECB00', c3: '#FFFFFF', group: 'B' },
+  { id: 'qat', name: 'Qatar',         flag: '🇶🇦', c1: '#8D1B3D', c2: '#FFFFFF', c3: '#8D1B3D', group: 'B' },
+  { id: 'sui', name: 'Suiza',         flag: '🇨🇭', c1: '#D52B1E', c2: '#FFFFFF', c3: '#D52B1E', group: 'B' },
+
+  // GRUPO C
+  { id: 'bra', name: 'Brasil',        flag: '🇧🇷', c1: '#009C3B', c2: '#FFDF00', c3: '#002776', group: 'C' },
+  { id: 'mar', name: 'Marruecos',     flag: '🇲🇦', c1: '#C1272D', c2: '#006233', c3: '#C1272D', group: 'C' },
+  { id: 'hai', name: 'Haití',         flag: '🇭🇹', c1: '#00205B', c2: '#D21034', c3: '#FFFFFF', group: 'C' },
+  { id: 'sco', name: 'Escocia',       flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', c1: '#005EB8', c2: '#FFFFFF', c3: '#005EB8', group: 'C' },
+
+  // GRUPO D
+  { id: 'usa', name: 'EE.UU.',        flag: '🇺🇸', c1: '#B22234', c2: '#3C3B6E', c3: '#FFFFFF', group: 'D' },
+  { id: 'par', name: 'Paraguay',      flag: '🇵🇾', c1: '#D52B1E', c2: '#FFFFFF', c3: '#0038A8', group: 'D' },
+  { id: 'aus', name: 'Australia',     flag: '🇦🇺', c1: '#00008B', c2: '#FFFFFF', c3: '#FF0000', group: 'D' },
+  { id: 'tur', name: 'Turquía',       flag: '🇹🇷', c1: '#E30A17', c2: '#FFFFFF', c3: '#E30A17', group: 'D' },
+
+  // GRUPO E
+  { id: 'ger', name: 'Alemania',      flag: '🇩🇪', c1: '#DD0000', c2: '#000000', c3: '#FFCE00', group: 'E' },
+  { id: 'cuw', name: 'Curazao',       flag: '🇨🇼', c1: '#002776', c2: '#F9E814', c3: '#FFFFFF', group: 'E' },
+  { id: 'civ', name: 'C. de Marfil',  flag: '🇨🇮', c1: '#F77F00', c2: '#FFFFFF', c3: '#009A44', group: 'E' },
+  { id: 'ecu', name: 'Ecuador',       flag: '🇪🇨', c1: '#FFD100', c2: '#003893', c3: '#EF3340', group: 'E' },
+
+  // GRUPO F
+  { id: 'ned', name: 'Países Bajos',  flag: '🇳🇱', c1: '#AE1C28', c2: '#FFFFFF', c3: '#21468B', group: 'F' },
+  { id: 'jpn', name: 'Japón',         flag: '🇯🇵', c1: '#BC002D', c2: '#FFFFFF', c3: '#BC002D', group: 'F' },
+  { id: 'swe', name: 'Suecia',        flag: '🇸🇪', c1: '#004B87', c2: '#FFCD00', c3: '#004B87', group: 'F' },
+  { id: 'tun', name: 'Túnez',         flag: '🇹🇳', c1: '#E70013', c2: '#FFFFFF', c3: '#E70013', group: 'F' },
+
+  // GRUPO G
+  { id: 'bel', name: 'Bélgica',       flag: '🇧🇪', c1: '#FAE042', c2: '#000000', c3: '#EF3340', group: 'G' },
+  { id: 'egy', name: 'Egipto',        flag: '🇪🇬', c1: '#CE1126', c2: '#FFFFFF', c3: '#000000', group: 'G' },
+  { id: 'irn', name: 'Irán',          flag: '🇮🇷', c1: '#239F40', c2: '#FFFFFF', c3: '#DA0000', group: 'G' },
+  { id: 'nzl', name: 'N. Zelanda',    flag: '🇳🇿', c1: '#00247D', c2: '#FFFFFF', c3: '#CC142B', group: 'G' },
+
+  // GRUPO H
+  { id: 'esp', name: 'España',        flag: '🇪🇸', c1: '#AA151B', c2: '#F1BF00', c3: '#AA151B', group: 'H' },
+  { id: 'cpv', name: 'Cabo Verde',    flag: '🇨🇻', c1: '#003893', c2: '#FFFFFF', c3: '#CF2027', group: 'H' },
+  { id: 'sau', name: 'Arabia S.',     flag: '🇸🇦', c1: '#006C35', c2: '#FFFFFF', c3: '#006C35', group: 'H' },
+  { id: 'uru', name: 'Uruguay',       flag: '🇺🇾', c1: '#75AADB', c2: '#FFFFFF', c3: '#75AADB', group: 'H' },
+
+  // GRUPO I
+  { id: 'fra', name: 'Francia',       flag: '🇫🇷', c1: '#002395', c2: '#FFFFFF', c3: '#ED2939', group: 'I' },
+  { id: 'sen', name: 'Senegal',       flag: '🇸🇳', c1: '#00853F', c2: '#FDEF42', c3: '#E31B23', group: 'I' },
+  { id: 'irq', name: 'Irak',          flag: '🇮🇶', c1: '#CE1126', c2: '#FFFFFF', c3: '#007A3D', group: 'I' },
+  { id: 'nor', name: 'Noruega',       flag: '🇳🇴', c1: '#BA0C2F', c2: '#FFFFFF', c3: '#00205B', group: 'I' },
+
+  // GRUPO J
+  { id: 'arg', name: 'Argentina',     flag: '🇦🇷', c1: '#74ACDF', c2: '#FFFFFF', c3: '#74ACDF', group: 'J' },
+  { id: 'alg', name: 'Argelia',       flag: '🇩🇿', c1: '#006233', c2: '#FFFFFF', c3: '#D21034', group: 'J' },
+  { id: 'aut', name: 'Austria',       flag: '🇦🇹', c1: '#ED2939', c2: '#FFFFFF', c3: '#ED2939', group: 'J' },
+  { id: 'jor', name: 'Jordania',      flag: '🇯🇴', c1: '#CE1126', c2: '#000000', c3: '#007A3D', group: 'J' },
+
+  // GRUPO K
+  { id: 'por', name: 'Portugal',      flag: '🇵🇹', c1: '#006600', c2: '#FF0000', c3: '#006600', group: 'K' },
+  { id: 'cod', name: 'RD Congo',      flag: '🇨🇩', c1: '#007FFF', c2: '#F7D618', c3: '#CE1021', group: 'K' },
+  { id: 'uzb', name: 'Uzbekistán',    flag: '🇺🇿', c1: '#0099B5', c2: '#FFFFFF', c3: '#1EB53A', group: 'K' },
+  { id: 'col', name: 'Colombia',      flag: '🇨🇴', c1: '#FCD116', c2: '#003087', c3: '#CE1126', group: 'K' },
+
+  // GRUPO L
+  { id: 'eng', name: 'Inglaterra',    flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', c1: '#CF091E', c2: '#FFFFFF', c3: '#CF091E', group: 'L' },
+  { id: 'cro', name: 'Croacia',       flag: '🇭🇷', c1: '#FF0000', c2: '#FFFFFF', c3: '#0000FF', group: 'L' },
+  { id: 'gha', name: 'Ghana',         flag: '🇬🇭', c1: '#006B3F', c2: '#FCD116', c3: '#EF3340', group: 'L' },
+  { id: 'pan', name: 'Panamá',        flag: '🇵🇦', c1: '#FFFFFF', c2: '#D21034', c3: '#005293', group: 'L' },
 ];
 
 export const COUNTRIES: Country[] = raw.map(c => ({

@@ -20,7 +20,19 @@ export default async function MatchesPage() {
     .order('match_date', { ascending: true })
     .order('match_time', { ascending: true });
 
+  // Fetch group standings
+  const { data: standings } = await supabase
+    .from('vw_group_standings')
+    .select('*')
+    .order('grupo', { ascending: true })
+    .order('pts', { ascending: false })
+    .order('dg', { ascending: false })
+    .order('gf', { ascending: false });
+
   return (
-    <MatchesClient initialMatches={matches ?? []} />
+    <MatchesClient 
+      initialMatches={matches ?? []} 
+      initialStandings={standings ?? []} 
+    />
   );
 }
