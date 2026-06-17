@@ -10,7 +10,7 @@ export default async function StandingsPage() {
 
   // Fetch all standings from the database
   const { data: standingsData, error } = await supabase
-    .from('grupo_posiciones')
+    .from('vw_group_standings')
     .select('*')
     .order('pts', { ascending: false })
     .order('dg', { ascending: false })
@@ -33,9 +33,9 @@ export default async function StandingsPage() {
 
   // If the database is empty (no finishes yet), we might want to generate empty groups based on our seed
   const groupNames = [
-    'Group A', 'Group B', 'Group C', 'Group D',
-    'Group E', 'Group F', 'Group G', 'Group H',
-    'Group I', 'Group J', 'Group K', 'Group L'
+    'Grupo A', 'Grupo B', 'Grupo C', 'Grupo D',
+    'Grupo E', 'Grupo F', 'Grupo G', 'Grupo H',
+    'Grupo I', 'Grupo J', 'Grupo K', 'Grupo L'
   ];
 
   return (

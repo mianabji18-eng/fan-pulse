@@ -11,7 +11,6 @@ import matchesData from '@/lib/data/world_cup_2026_groups.json';
 export async function POST(request: Request) {
   try {
     // 1. (Optional) Basic Security Check
-    // In production, you would verify the user is an admin or require a secret key
     const authHeader = request.headers.get('authorization');
     if (process.env.SEED_SECRET && authHeader !== `Bearer ${process.env.SEED_SECRET}`) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -19,11 +18,37 @@ export async function POST(request: Request) {
 
     const supabase = await createClient();
 
+    // Map the Spanish JSON to English DB schema
+    const formattedMatches = matchesData.map((item: any) => {
+      // Parse fecha_utc into date and time
+      const dateObj = new Date(item.fecha_utc);
+      const match_date = dateObj.toISOString().split('T')[0];
+      const match_time = dateObj.toISOString().split('T')[1].substring(0, 5); // "HH:MM"
+
+      // Map status
+      let status = 'upcoming';
+      if (item.estado === 'FINALIZADO') status = 'finished';
+      else if (item.estado === 'EN CURSO') status = 'live';
+
+      return {
+        id: item.id,
+        match_date,
+        match_time,
+        home_country_id: item.local,
+        away_country_id: item.visitante,
+        stadium_id: item.estadio,
+        phase: item.fase, // We map the group directly to phase (e.g. "Grupo A")
+        status,
+        home_score: item.goles_local,
+        away_score: item.goles_visitante,
+        predictions_locked: status === 'finished' || status === 'live'
+      };
+    });
+
     // 2. Perform the bulk insert
-    // Supabase allows bulk inserts by passing an array of objects
     const { data, error } = await supabase
       .from('matches')
-      .upsert(matchesData, { onConflict: 'id' }) // Upsert to avoid duplicates if run twice
+      .upsert(formattedMatches, { onConflict: 'id' }) 
       .select();
 
     if (error) {
@@ -32,7 +57,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      message: `Successfully seeded ${matchesData.length} matches!`,
+      message: `Successfully seeded ${formattedMatches.length} matches!`,
       inserted: data?.length || 0
     });
   } catch (error: any) {

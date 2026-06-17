@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { COUNTRY_MAP } from '@/lib/data/countries';
 import Link from 'next/link';
 import styles from './page.module.css';
+import LogoutButton from './LogoutButton';
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -112,6 +113,10 @@ export default async function ProfilePage() {
           <p>Visita la tienda oficial para canjear tus puntos.</p>
           <Link href="/store" className="btn btn-primary" style={{ marginTop: '1rem', display: 'inline-block' }}>Ir a la Tienda</Link>
         </div>
+      </section>
+
+      <section className={styles.section} style={{ marginTop: '2rem' }}>
+        <LogoutButton />
       </section>
     </div>
   );
