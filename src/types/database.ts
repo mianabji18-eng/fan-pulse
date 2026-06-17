@@ -38,6 +38,7 @@ export type MatchRow = {
   away_country_id: string;
   stadium_id: string;
   phase: string;
+  group_name: string | null;
   status: MatchStatus;
   home_score: number | null;
   away_score: number | null;
@@ -85,6 +86,20 @@ export type UserBadgeRow = {
   user_id: string;
   badge_id: string;
   unlocked_at: string;
+};
+
+export type GroupStandingRow = {
+  id: string;
+  grupo: string;
+  country_id: string;
+  pj: number;
+  g: number;
+  e: number;
+  p: number;
+  gf: number;
+  gc: number;
+  dg: number;
+  pts: number;
 };
 
 export type LeaderboardRow = {

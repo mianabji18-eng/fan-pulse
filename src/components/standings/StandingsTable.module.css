@@ -1,0 +1,168 @@
+.tableContainer {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-xl);
+  transition: transform var(--t-normal) var(--ease-spring), box-shadow var(--t-normal);
+  font-family: var(--font-body);
+}
+
+.tableContainer:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.tableHeader {
+  background: var(--grad-card);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.tableHeader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--grad-brand);
+}
+
+.groupTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.table th {
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-card);
+  white-space: nowrap;
+}
+
+.row {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background var(--t-fast) ease;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.rowQualified {
+  background: rgba(var(--c1-rgb), 0.03);
+}
+
+.table td {
+  padding: var(--space-md);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.colPos {
+  width: 40px;
+}
+
+.position {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+}
+
+.positionQualified {
+  background: var(--grad-brand);
+  color: var(--text-on-accent);
+  box-shadow: 0 0 10px rgba(var(--c1-rgb), 0.4);
+}
+
+.colTeam {
+  text-align: left !important;
+  width: 100%;
+}
+
+.teamInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.flagWrapper {
+  width: 32px;
+  height: 24px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.flagPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border: 1px solid var(--border-card);
+}
+
+.teamName {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.colStat {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.colPts {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  background: rgba(0,0,0,0.2);
+}
+
+.emptyState {
+  padding: var(--space-xl) !important;
+  color: var(--text-muted);
+  font-style: italic;
+}
