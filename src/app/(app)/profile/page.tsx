@@ -3,6 +3,7 @@ import { COUNTRY_MAP } from '@/lib/data/countries';
 import Link from 'next/link';
 import styles from './page.module.css';
 import LogoutButton from './LogoutButton';
+import SettingsButton from './SettingsButton';
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -115,7 +116,8 @@ export default async function ProfilePage() {
         </div>
       </section>
 
-      <section className={styles.section} style={{ marginTop: '2rem' }}>
+      <section className={styles.section} style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <SettingsButton userProfile={profile} userEmail={user?.email || ''} />
         <LogoutButton />
       </section>
     </div>
