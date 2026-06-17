@@ -18,6 +18,13 @@ const resolveCountry = (id: string) => {
   return null;
 };
 
+// Helper to fix Windows emoji flag rendering by using Twemoji SVG
+const getTwemojiUrl = (emoji: string) => {
+  if (!emoji || emoji === '🏳️') return '';
+  const codePoints = Array.from(emoji).map(c => c.codePointAt(0)?.toString(16)).join('-');
+  return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${codePoints}.svg`;
+};
+
 // ============================================================
 // Fan Pulse — Match Center (Client Component)
 // ============================================================
@@ -105,7 +112,11 @@ export function MatchesClient({
                     {/* Home Team */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <span className="text-2xl drop-shadow-md">{resolveCountry(match.home_country_id)?.flag ?? '🏳️'}</span>
+                        <span className="w-8 h-6 flex items-center justify-center shrink-0 drop-shadow-md">
+                          {resolveCountry(match.home_country_id)?.flag ? (
+                            <img src={getTwemojiUrl(resolveCountry(match.home_country_id)!.flag)} alt="flag" className="w-full h-full object-contain" />
+                          ) : '🏳️'}
+                        </span>
                         <span className="text-base font-bold tracking-tight text-gray-100">
                           {resolveCountry(match.home_country_id)?.name ?? match.home_country_id}
                         </span>
@@ -117,7 +128,11 @@ export function MatchesClient({
                     {/* Away Team */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <span className="text-2xl drop-shadow-md">{resolveCountry(match.away_country_id)?.flag ?? '🏳️'}</span>
+                        <span className="w-8 h-6 flex items-center justify-center shrink-0 drop-shadow-md">
+                          {resolveCountry(match.away_country_id)?.flag ? (
+                            <img src={getTwemojiUrl(resolveCountry(match.away_country_id)!.flag)} alt="flag" className="w-full h-full object-contain" />
+                          ) : '🏳️'}
+                        </span>
                         <span className="text-base font-bold tracking-tight text-gray-100">
                           {resolveCountry(match.away_country_id)?.name ?? match.away_country_id}
                         </span>
@@ -183,8 +198,10 @@ export function MatchesClient({
                         <td className="px-5 py-3.5">
                           <div className="flex items-center gap-3">
                             <span className={`w-1 h-6 rounded-full ${isTopTwo ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]' : 'bg-transparent'}`} />
-                            <span className="text-xl drop-shadow-sm">
-                              {resolveCountry(team.equipo_id)?.flag ?? '🏳️'}
+                            <span className="w-6 h-4 flex items-center justify-center shrink-0 drop-shadow-sm">
+                              {resolveCountry(team.equipo_id)?.flag ? (
+                                <img src={getTwemojiUrl(resolveCountry(team.equipo_id)!.flag)} alt="flag" className="w-full h-full object-contain" />
+                              ) : '🏳️'}
                             </span>
                             <span className="font-bold tracking-tight text-gray-200 group-hover:text-white transition-colors">
                               {resolveCountry(team.equipo_id)?.name ?? team.equipo_nombre}
