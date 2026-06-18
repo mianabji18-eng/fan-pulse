@@ -20,7 +20,9 @@ const nextConfig: NextConfig = {
   },
   // Required for Supabase SSR edge compatibility
   experimental: {
-    // serverActions is enabled by default in Next.js 15
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
   },
 };
 

@@ -57,6 +57,8 @@ type Standing = {
   pts: number;
 };
 
+import { DatePicker, getLocalTodayStr } from '@/components/ui/DatePicker';
+
 export function MatchesClient({ 
   initialMatches, 
   initialStandings 
@@ -65,6 +67,16 @@ export function MatchesClient({
   initialStandings: Standing[] 
 }) {
   const [activeTab, setActiveTab] = useState<'calendar' | 'groups' | 'bracket'>('calendar');
+
+  const todayStr = getLocalTodayStr();
+  const uniqueDates = Array.from(new Set(initialMatches.map(m => m.match_date))).sort();
+  let initialIndex = uniqueDates.indexOf(todayStr);
+  if (initialIndex === -1) {
+    initialIndex = uniqueDates.findIndex(d => d > todayStr);
+    if (initialIndex === -1) initialIndex = uniqueDates.length - 1;
+    if (initialIndex === -1) initialIndex = 0;
+  }
+  const [selectedDate, setSelectedDate] = useState(uniqueDates[initialIndex] || todayStr);
 
   // Helper to format date
   const formatDate = (dateString: string) => {
@@ -84,16 +96,27 @@ export function MatchesClient({
       return acc;
     }, {} as Record<string, Match[]>);
 
+    const matchesForDate = grouped[selectedDate] || [];
+
     return (
-      <div className="flex flex-col gap-8">
-        {Object.entries(grouped).map(([date, matches]) => (
-          <div key={date} className="flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest pl-2 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
-              {formatDate(date)}
-            </h3>
+      <div className="flex flex-col gap-6">
+        <DatePicker 
+          selectedDate={selectedDate} 
+          onDateChange={setSelectedDate} 
+          availableDates={uniqueDates} 
+        />
+        
+        <div className="flex flex-col gap-4">
+          <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest pl-2 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E3003F]"></span>
+            {formatDate(selectedDate)}
+          </h3>
+          
+          {matchesForDate.length === 0 ? (
+            <div className="text-center py-8 text-gray-500">No hay partidos para esta fecha.</div>
+          ) : (
             <div className="flex flex-col gap-3">
-              {matches.map(match => (
+              {matchesForDate.map(match => (
                 <Link 
                   key={match.id} 
                   href={`/matches/${match.id}`} 
@@ -156,8 +179,8 @@ export function MatchesClient({
                 </Link>
               ))}
             </div>
-          </div>
-        ))}
+          )}
+        </div>
       </div>
     );
   };

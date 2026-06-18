@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { COUNTRY_MAP } from '@/lib/data/countries';
 import Link from 'next/link';
 import { PredictionForm } from '@/components/prediction/PredictionForm';
+import { CheckInUploader } from '@/components/checkin/CheckInUploader';
 import styles from './page.module.css';
 
 // ============================================================
@@ -17,21 +18,29 @@ export default async function MatchDetailsPage({
   const { id } = await params;
   const supabase = await createClient();
 
-  // Fetch match details with stadium info
-  const { data: match } = await supabase
+  // Fetch match details
+  const { data: match, error: matchError } = await supabase
     .from('matches')
-    .select(`
-      *,
-      stadiums (
-        name,
-        city,
-        capacity
-      )
-    `)
+    .select('*')
     .eq('id', id)
     .single();
 
-  if (!match) return notFound();
+  if (!match) {
+    console.error('Match not found or error:', matchError);
+    return notFound();
+  }
+
+  // Fetch stadium separately
+  const { data: stadium } = await supabase
+    .from('stadiums')
+    .select('name, city, capacity')
+    .eq('id', match.stadium_id)
+    .single();
+
+  // Attach stadium to match to keep the rest of the code working
+  if (stadium) {
+    match.stadiums = stadium;
+  }
 
   // Fetch current user's prediction and check-in for this match
   const { data: { user } } = await supabase.auth.getUser();
@@ -53,6 +62,22 @@ export default async function MatchDetailsPage({
   const formattedDate = new Date(match.match_date + 'T' + match.match_time).toLocaleDateString('es', {
     weekday: 'long', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
   });
+
+  const todayStr = new Date().toISOString().split('T')[0];
+  
+  // Prediction Logic: Not allowed if match is finished or in the past
+  let predictionMessage = null;
+  if (match.status === 'finished' || match.match_date < todayStr) {
+    predictionMessage = 'El tiempo para predecir ha finalizado.';
+  }
+
+  // Check-in Logic: Only allowed on the exact day of the match and if not finished
+  let checkInMessage = null;
+  if (match.status === 'finished' || match.match_date < todayStr) {
+    checkInMessage = 'El tiempo para hacer check-in ha finalizado.';
+  } else if (match.match_date > todayStr) {
+    checkInMessage = 'El check-in estará disponible el día del partido.';
+  }
 
   return (
     <div className={styles.page}>
@@ -124,7 +149,7 @@ export default async function MatchDetailsPage({
                 matchId={match.id} 
                 initialHomeScore={prediction.pred_home_score}
                 initialAwayScore={prediction.pred_away_score}
-                isLocked={match.predictions_locked}
+                isLocked={true}
               />
               {prediction.graded_at && (
                 <div className={styles.pointsEarned}>
@@ -132,6 +157,10 @@ export default async function MatchDetailsPage({
                 </div>
               )}
             </>
+          ) : predictionMessage ? (
+            <div className={styles.actionEmpty}>
+              <p>{predictionMessage}</p>
+            </div>
           ) : (
             <>
               <div className={styles.actionEmpty}>
@@ -162,12 +191,13 @@ export default async function MatchDetailsPage({
                 </div>
               )}
             </div>
+          ) : checkInMessage ? (
+            <div className={styles.actionEmpty}>
+              <p>{checkInMessage}</p>
+            </div>
           ) : (
             <div className={styles.actionEmpty}>
-              <p>Comparte una foto viendo el partido.</p>
-              <Link href={`/checkin`} className="btn btn-sm btn-primary" style={{ width: '100%', marginTop: '8px' }}>
-                Hacer Check-in
-              </Link>
+              <CheckInUploader matchId={match.id} />
             </div>
           )}
         </div>

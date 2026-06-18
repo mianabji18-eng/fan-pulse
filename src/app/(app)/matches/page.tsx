@@ -20,6 +20,13 @@ export default async function MatchesPage() {
     .order('match_date', { ascending: true })
     .order('match_time', { ascending: true });
 
+  // Adjust dates back by 1 day to fix the timezone/offset issue in the DB
+  const adjustedMatches = (matches ?? []).map(m => {
+    const d = new Date(m.match_date + 'T12:00:00');
+    d.setDate(d.getDate() - 1);
+    return { ...m, match_date: d.toISOString().split('T')[0] };
+  });
+
   // Fetch group standings
   const { data: standings } = await supabase
     .from('vw_group_standings')
@@ -31,7 +38,7 @@ export default async function MatchesPage() {
 
   return (
     <MatchesClient 
-      initialMatches={matches ?? []} 
+      initialMatches={adjustedMatches} 
       initialStandings={standings ?? []} 
     />
   );

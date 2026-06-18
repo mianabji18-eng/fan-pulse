@@ -80,3 +80,16 @@
   color: var(--text-secondary, #888);
   padding: 2rem;
 }
+
+.matchLinkWrapper {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  padding: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.matchLinkWrapper:hover {
+  background: rgba(255, 255, 255, 0.05);
+}

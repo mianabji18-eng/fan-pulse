@@ -3,6 +3,7 @@ import { COUNTRY_MAP } from '@/lib/data/countries';
 import { redirect } from 'next/navigation';
 import styles from './page.module.css';
 import type { Metadata } from 'next';
+import { HomeMatchList } from './HomeMatchList';
 
 // ============================================================
 // Fan Pulse — Home Dashboard (Server Component)
@@ -27,9 +28,8 @@ export default async function HomePage() {
     supabase
       .from('matches')
       .select('*')
-      .in('status', ['live', 'upcoming'])
       .order('match_date', { ascending: true })
-      .limit(5),
+      .order('match_time', { ascending: true }),
     supabase
       .from('leaderboard')
       .select('username, country_id, total_points, rank')
@@ -38,9 +38,16 @@ export default async function HomePage() {
   ]);
 
   const profile = profileResult.data;
-  const matches = matchesResult.data ?? [];
+  const matchesData = matchesResult.data ?? [];
   const leaders = leaderboardResult.data ?? [];
   const country = profile ? COUNTRY_MAP[profile.country_id] : null;
+
+  // Adjust dates back by 1 day to fix the timezone/offset issue in the DB
+  const matches = matchesData.map(m => {
+    const d = new Date(m.match_date + 'T12:00:00');
+    d.setDate(d.getDate() - 1);
+    return { ...m, match_date: d.toISOString().split('T')[0] };
+  });
 
   const liveMatch = matches.find(m => m.status === 'live');
   const upcomingMatches = matches.filter(m => m.status === 'upcoming').slice(0, 3);
@@ -114,37 +121,13 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ---- Upcoming Matches ---- */}
+      {/* ---- Match List (Calendar View) ---- */}
       <section className={styles.section}>
         <div className="section-header">
-          <h2>Próximos partidos</h2>
-          <a href="/matches" id="home-see-all-matches">Ver todos</a>
+          <h2>Partidos</h2>
+          <a href="/matches" id="home-see-all-matches">Ver calendario</a>
         </div>
-        <div className={styles.matchList}>
-          {upcomingMatches.map(match => (
-            <a
-              key={match.id}
-              href={`/matches/${match.id}`}
-              className={styles.matchRow}
-              id={`home-match-${match.id}`}
-            >
-              <span className={styles.matchPhase}>{match.phase}</span>
-              <div className={styles.matchTeams}>
-                <span>{COUNTRY_MAP[match.home_country_id]?.flag ?? '🏳️'}</span>
-                <span className={styles.matchVs}>vs</span>
-                <span>{COUNTRY_MAP[match.away_country_id]?.flag ?? '🏳️'}</span>
-              </div>
-              <span className={styles.matchDate}>
-                {new Date(match.match_date + 'T' + match.match_time).toLocaleDateString('es', {
-                  weekday: 'short', month: 'short', day: 'numeric'
-                })}
-              </span>
-            </a>
-          ))}
-          {upcomingMatches.length === 0 && (
-            <p className={styles.emptyState}>No hay partidos próximos disponibles.</p>
-          )}
-        </div>
+        <HomeMatchList matches={matches} />
       </section>
 
       {/* ---- Mini Leaderboard ---- */}
