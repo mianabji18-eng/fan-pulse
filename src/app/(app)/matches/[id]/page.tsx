@@ -6,6 +6,13 @@ import { PredictionForm } from '@/components/prediction/PredictionForm';
 import { CheckInUploader } from '@/components/checkin/CheckInUploader';
 import styles from './page.module.css';
 
+// Helper to fix Windows emoji flag rendering by using Twemoji SVG
+const getTwemojiUrl = (emoji: string) => {
+  if (!emoji || emoji === '🏳️') return '';
+  const codePoints = Array.from(emoji).map(c => c.codePointAt(0)?.toString(16)).join('-');
+  return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${codePoints}.svg`;
+};
+
 // ============================================================
 // Fan Pulse — Match Details Page
 // ============================================================
@@ -90,7 +97,11 @@ export default async function MatchDetailsPage({
       {/* Scoreboard */}
       <section className={styles.scoreboard}>
         <div className={styles.team}>
-          <span className={styles.flag}>{homeCountry?.flag ?? '🏳️'}</span>
+          <span className={styles.flag}>
+            {homeCountry?.flag ? (
+              <img src={getTwemojiUrl(homeCountry.flag)} alt={homeCountry.name} style={{ width: '3.5rem', height: '3.5rem', objectFit: 'contain' }} />
+            ) : '🏳️'}
+          </span>
           <span className={styles.teamName}>{homeCountry?.name ?? match.home_country_id}</span>
         </div>
         
@@ -109,7 +120,11 @@ export default async function MatchDetailsPage({
         </div>
 
         <div className={styles.team}>
-          <span className={styles.flag}>{awayCountry?.flag ?? '🏳️'}</span>
+          <span className={styles.flag}>
+            {awayCountry?.flag ? (
+              <img src={getTwemojiUrl(awayCountry.flag)} alt={awayCountry.name} style={{ width: '3.5rem', height: '3.5rem', objectFit: 'contain' }} />
+            ) : '🏳️'}
+          </span>
           <span className={styles.teamName}>{awayCountry?.name ?? match.away_country_id}</span>
         </div>
       </section>
